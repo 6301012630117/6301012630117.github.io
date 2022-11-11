@@ -1,0 +1,14 @@
+from pms7003 import Pms7003Sensor, PmsSensorException
+
+comport = 'COM8'
+if __name__ == '__main__':
+
+    sensor = Pms7003Sensor(comport)
+
+    while True:
+        try:
+            print(sensor.read())
+        except PmsSensorException:
+            print('Connection problem')
+
+    sensor.close()

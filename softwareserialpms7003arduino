@@ -1,0 +1,24 @@
+#include "PMS.h"
+#include "SoftwareSerial.h"
+
+SoftwareSerial softSerial(2, 3); //(RX, TX)
+
+PMS pms(softSerial);
+PMS::DATA data;
+
+void setup()
+{
+  Serial.begin(9600);   // Hardware serial port: prints data
+  softSerial.begin(9600);  // Software serial port: communicates w/ PMS5003 sensor via pms() library
+}
+
+void loop()
+{
+  if (pms.read(data)){
+    
+    Serial.print("PM 2.5 (ug/m3): ");
+    Serial.println(data.PM_AE_UG_2_5);
+    Serial.println();
+    delay(1000);
+  }
+}
